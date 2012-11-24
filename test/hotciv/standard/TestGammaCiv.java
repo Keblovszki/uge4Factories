@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
+import hotciv.different.AlphaAttackStrategy;
 import hotciv.different.AlphaWinnerStrategy;
 import hotciv.different.AlphaWorldAgingStrategy;
 import hotciv.different.AlphaWorldLayoutStrategy;
@@ -19,7 +20,8 @@ public class TestGammaCiv {
 				new AlphaWorldAgingStrategy(),
 				new AlphaWinnerStrategy(),
 				new GammaUnitActionStrategy(), 
-				new AlphaWorldLayoutStrategy());
+				new AlphaWorldLayoutStrategy(),
+				new AlphaAttackStrategy() );
 	}
 	
 	@Test

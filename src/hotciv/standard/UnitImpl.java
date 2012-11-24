@@ -78,7 +78,10 @@ public class UnitImpl implements Unit{
 		else if (type.equals(GameConstants.ARCHER) && this.getDefensiveStrength() != defenseStrength) {
 			return isFortify;
 		}
-		else return false;
+		else if(type.equals(GameConstants.SETTLER) || type.equals(GameConstants.LEGION)) {
+			return true;
+		}
+		return false;
 	}
 
 }

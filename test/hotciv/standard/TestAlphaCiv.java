@@ -1,17 +1,9 @@
 package hotciv.standard;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import hotciv.framework.City;
-import hotciv.framework.Game;
-import hotciv.framework.GameConstants;
-import hotciv.framework.Player;
-import hotciv.framework.Position;
-import hotciv.framework.Tile;
-import hotciv.framework.Unit;
+import static org.junit.Assert.*;
+import hotciv.framework.*;
 import hotciv.different.*;
+import hotciv.different.AlphaAttackStrategy;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,7 +29,8 @@ public class TestAlphaCiv {
 				new AlphaWorldAgingStrategy(),
 				new AlphaWinnerStrategy(),
 				new AlphaUnitActionStrategy(), 
-				new AlphaWorldLayoutStrategy());
+				new AlphaWorldLayoutStrategy(),
+				new AlphaAttackStrategy() );
 	}
 
 	@Test
@@ -248,6 +241,7 @@ public class TestAlphaCiv {
 	public void moveAUnit() {
 		Unit u1 = game.getUnitAt(new Position(4, 3));
 		assertNotNull("u1 should not be null", u1);
+		assertNull("s", game.getUnitAt(new Position(4, 4)));
 
 		game.moveUnit(new Position(4, 3), new Position(4, 4));
 
@@ -266,7 +260,7 @@ public class TestAlphaCiv {
 		Unit u2 = game.getUnitAt(new Position(3, 2));
 		assertNotNull("u should not be null", u2);
 
-		game.moveUnit(new Position(2, 0), new Position(3, 2));
+		game.attackUnit(new Position(2, 0), new Position(3, 2));
 
 		assertEquals("u1 has won", u1, game.getUnitAt(new Position(3, 2)));
 

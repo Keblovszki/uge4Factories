@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
+import hotciv.different.AlphaAttackStrategy;
 import hotciv.different.AlphaUnitActionStrategy;
 import hotciv.different.AlphaWorldLayoutStrategy;
 import hotciv.different.BetaWinnerStrategy;
@@ -22,7 +23,8 @@ public class TestBetaCiv {
 				new BetaWorldAgingStrategy(),
 				new BetaWinnerStrategy(), 
 				new AlphaUnitActionStrategy(), 
-				new AlphaWorldLayoutStrategy());
+				new AlphaWorldLayoutStrategy(),
+				new AlphaAttackStrategy() );
 	}
 	
 	@Test

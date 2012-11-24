@@ -25,26 +25,26 @@ import java.util.*;
 public class GameImpl implements Game {
 	private Player playerInTurn = Player.RED;
 	private int age = -4000;
-	HashMap<Position, CityImpl> mapCity = new HashMap<Position, CityImpl>();
-	HashMap<Position, UnitImpl> mapUnit = new HashMap<Position, UnitImpl>();
-	HashMap<Position, TileImpl> mapTile = new HashMap<Position, TileImpl>();
+	public HashMap<Position, CityImpl> mapCity = new HashMap<Position, CityImpl>();
+	public HashMap<Position, UnitImpl> mapUnit = new HashMap<Position, UnitImpl>();
+	public HashMap<Position, TileImpl> mapTile = new HashMap<Position, TileImpl>();
 	private WorldAgingStrategy worldAgingStrategy;
 	private WinnerStrategy winnerStrategy;
 	private UnitActionStrategy unitActionStrategy;
 	private WorldLayoutStrategy worldLayoutStrategy;
+	private AttackingStrategy attackingStrategy;
 	
 	//Constructor
-	public GameImpl(WorldAgingStrategy was, WinnerStrategy ws, UnitActionStrategy uas, WorldLayoutStrategy wls) {
+	public GameImpl(WorldAgingStrategy was, WinnerStrategy ws, UnitActionStrategy uas, WorldLayoutStrategy wls, AttackingStrategy as) {
 		
 		worldAgingStrategy = was;
 		winnerStrategy = ws;
 		unitActionStrategy = uas;
 		worldLayoutStrategy = wls;
+		attackingStrategy = as;
 		
 		mapCity.putAll(worldLayoutStrategy.makeCityList());
-		
 		mapUnit.putAll(worldLayoutStrategy.makeUnitList());
-		
 		mapTile.putAll(worldLayoutStrategy.makeTileList());
 	}
 	
@@ -93,6 +93,7 @@ public class GameImpl implements Game {
 				}
 			}
 		}
+		/*
 		//Attack another unit
 		else if(mapUnit.get(to) != null) {
 			if(mapUnit.get(from).isNotArcherFortify() == true) {
@@ -113,7 +114,36 @@ public class GameImpl implements Game {
 				}
 			}
 		}
-			return false;
+		*/
+		return false;
+	}
+	
+	@Override
+	public boolean attackUnit(Position from, Position to) {
+		if(mapUnit.get(to) != null) {
+			attackingStrategy.setUp(this);
+			attackingStrategy.resultOfTheAttack(this, from, to);
+			/*
+			if(mapUnit.get(from).isNotArcherFortify() == true) {
+				return false;
+			}
+			else{
+				mapUnit.remove(to);
+				mapUnit.put(to, mapUnit.get(from) );
+				mapUnit.remove(from);
+				if(mapCity.get(to) != null ) {
+					if(mapCity.get(to).getOwner() == mapUnit.get(to).getOwner()) {
+						return true;
+					}
+					else {
+						mapCity.get(to).setOwner(mapUnit.get(to).getOwner());
+						return true;
+					}
+				}
+			}
+			*/
+		}
+		return false;
 	}
 
 	public void endOfTurn() {

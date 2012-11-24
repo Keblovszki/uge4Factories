@@ -125,4 +125,6 @@ public interface Game {
   
   /** something horrible */
   public void createProductionInCityAt( Position p );
+  
+  public boolean attackUnit(Position from, Position to);
 }
