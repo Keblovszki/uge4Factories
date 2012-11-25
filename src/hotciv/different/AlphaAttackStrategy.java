@@ -1,9 +1,7 @@
 package hotciv.different;
 
-import hotciv.framework.Game;
-import hotciv.framework.Position;
-import hotciv.standard.AttackingStrategy;
-import hotciv.standard.GameImpl;
+import hotciv.framework.*;
+import hotciv.standard.*;
 
 public class AlphaAttackStrategy implements AttackingStrategy{
 	private GameImpl game;
