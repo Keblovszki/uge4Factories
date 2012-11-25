@@ -40,7 +40,7 @@ public class TestWorldLayoutStrategy implements WorldLayoutStrategy {
 		}
 		mapTile.put(new Position(1, 0), new TileImpl(new Position (1, 0), GameConstants.OCEANS));
 		mapTile.put(new Position(0, 1), new TileImpl(new Position (0, 1), GameConstants.HILLS));
-		mapTile.put(new Position(2, 0), new TileImpl(new Position (2, 0), GameConstants.FOREST));
+		mapTile.put(new Position(2, 1), new TileImpl(new Position (2, 1), GameConstants.FOREST));
 		mapTile.put(new Position(2, 2), new TileImpl(new Position (2, 2), GameConstants.MOUNTAINS));
 			//return new TileImpl(p , GameConstants.PLAINS);
 		return mapTile;

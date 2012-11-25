@@ -17,7 +17,7 @@ public class EpsilonAttackStrategy implements AttackingStrategy {
 		attackStrength = (attackStrength + bonusFromUnitsAround(attackersPosition))*bonusFromTerrain(attackersPosition);
 		defenseStrength = (defenseStrength + bonusFromUnitsAround(defendersPosition))*bonusFromTerrain(defendersPosition);
 				
-		return attackStrength > defenseStrength;
+		return (attackStrength > defenseStrength);
 	}
 	
 	public int bonusFromUnitsAround(Position p) {
@@ -79,6 +79,6 @@ public class EpsilonAttackStrategy implements AttackingStrategy {
 	}
 	
 	public void setUp(GameImpl game) {
-		
+		this.game = game;
 	}
 }

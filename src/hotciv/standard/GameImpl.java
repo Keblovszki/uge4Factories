@@ -121,8 +121,17 @@ public class GameImpl implements Game {
 	@Override
 	public boolean attackUnit(Position from, Position to) {
 		if(mapUnit.get(to) != null) {
-			attackingStrategy.setUp(this);
-			attackingStrategy.resultOfTheAttack(this, from, to);
+			this.attackingStrategy.setUp(this);
+			if(this.attackingStrategy.resultOfTheAttack(this, from, to) == true) {
+				mapUnit.remove(to);
+				mapUnit.put(to, mapUnit.get(from));
+				mapUnit.remove(from);
+				return true;
+			}
+			else {
+				mapUnit.remove(from);
+				return true;
+			}
 			/*
 			if(mapUnit.get(from).isNotArcherFortify() == true) {
 				return false;

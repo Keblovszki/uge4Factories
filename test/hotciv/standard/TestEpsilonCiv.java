@@ -31,6 +31,7 @@ public class TestEpsilonCiv {
 		
 		//do the attack!
 		game.attackUnit(from, to);
+		assertTrue("should be true", game.attackUnit(from, to));
 		assertNull("The 'from' position should be null", from);
 		assertEquals("The 'to' position should be the redArcher", game.getUnitAt(to).getTypeString(), GameConstants.ARCHER);
 	}
