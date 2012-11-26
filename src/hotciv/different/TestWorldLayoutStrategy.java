@@ -22,7 +22,8 @@ public class TestWorldLayoutStrategy implements WorldLayoutStrategy {
 		mapUnit.put(new Position(2, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
 		mapUnit.put(new Position(3, 3), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
 		mapUnit.put(new Position(0, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
-
+		mapUnit.put(new Position(4, 1), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
+		
 		return mapUnit;
 	}
 	

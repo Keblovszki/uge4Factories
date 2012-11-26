@@ -7,7 +7,7 @@ public class AlphaAttackStrategy implements AttackingStrategy{
 	private GameImpl game;
 	
 	@Override
-	public boolean resultOfTheAttack(GameImpl game, Position attackersPosition, Position defendersPosition) {
+	public boolean resultOfTheAttack(Position attackersPosition, Position defendersPosition) {
 		if(game.mapUnit.get(attackersPosition).isNotArcherFortify() == false) {
 			return false;
 		}

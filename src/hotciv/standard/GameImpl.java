@@ -28,11 +28,14 @@ public class GameImpl implements Game {
 	public HashMap<Position, CityImpl> mapCity = new HashMap<Position, CityImpl>();
 	public HashMap<Position, UnitImpl> mapUnit = new HashMap<Position, UnitImpl>();
 	public HashMap<Position, TileImpl> mapTile = new HashMap<Position, TileImpl>();
+	public int attackConterRED = 0;
+	public int attackCounterBLUE = 0;
 	private WorldAgingStrategy worldAgingStrategy;
 	private WinnerStrategy winnerStrategy;
 	private UnitActionStrategy unitActionStrategy;
 	private WorldLayoutStrategy worldLayoutStrategy;
 	private AttackingStrategy attackingStrategy;
+	private int round = 1;
 	
 	//Constructor
 	public GameImpl(WorldAgingStrategy was, WinnerStrategy ws, UnitActionStrategy uas, WorldLayoutStrategy wls, AttackingStrategy as) {
@@ -120,39 +123,29 @@ public class GameImpl implements Game {
 	
 	@Override
 	public boolean attackUnit(Position from, Position to) {
-		if(mapUnit.get(to) != null) {
+		if (mapUnit.get(to) != null) {
 			this.attackingStrategy.setUp(this);
-			if(this.attackingStrategy.resultOfTheAttack(this, from, to) == true) {
-				mapUnit.remove(to);
-				mapUnit.put(to, mapUnit.get(from));
-				mapUnit.remove(from);
-				return true;
-			}
-			else {
-				mapUnit.remove(from);
-				return true;
-			}
-			/*
-			if(mapUnit.get(from).isNotArcherFortify() == true) {
-				return false;
-			}
-			else{
-				mapUnit.remove(to);
-				mapUnit.put(to, mapUnit.get(from) );
-				mapUnit.remove(from);
-				if(mapCity.get(to) != null ) {
-					if(mapCity.get(to).getOwner() == mapUnit.get(to).getOwner()) {
-						return true;
-					}
-					else {
-						mapCity.get(to).setOwner(mapUnit.get(to).getOwner());
-						return true;
-					}
+			boolean rota = this.attackingStrategy.resultOfTheAttack(from, to);
+			if (rota == true) {
+				if (getUnitAt(to).getOwner() == Player.RED) {
+					attackConterRED += 1;
+				}
+				if (getUnitAt(to).getOwner() == Player.BLUE) {
+					attackCounterBLUE += 1;
 				}
 			}
-			*/
+			return rota;
 		}
 		return false;
+	}
+	
+	public int countWins(Player p) {
+		if(p == Player.RED) {
+			return attackConterRED;
+		}
+		else {
+			return attackCounterBLUE;
+		}
 	}
 
 	public void endOfTurn() {
@@ -165,8 +158,13 @@ public class GameImpl implements Game {
 			for(CityImpl c : mapCity.values()){
 				c.doProductionSum();
 			}
+			round += 1;
 		}
-	}	
+	}
+	
+	public int getRounds() {
+		return round;
+	}
 
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
 		

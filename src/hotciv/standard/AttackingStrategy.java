@@ -5,6 +5,6 @@ import hotciv.different.*;
 
 public interface AttackingStrategy {
 	
-	public boolean resultOfTheAttack(GameImpl game, Position attackersPosition, Position defendersPosition);
+	public boolean resultOfTheAttack(Position attackersPosition, Position defendersPosition);
 	public void setUp(GameImpl game);
 }

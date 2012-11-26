@@ -1,23 +1,38 @@
 package hotciv.different;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import hotciv.framework.*;
 import hotciv.standard.*;
 
 public class EpsilonAttackStrategy implements AttackingStrategy {
-	private Game game;
+	private GameImpl game;
+	private Dice dice;
 	
+	public EpsilonAttackStrategy(Dice awesomeDice) {
+		dice = awesomeDice;
+	}
+		
 	@Override
-	public boolean resultOfTheAttack(GameImpl game, Position attackersPosition, Position defendersPosition) {
+	public boolean resultOfTheAttack(Position attackersPosition, Position defendersPosition) {
 		
 		int attackStrength = game.getUnitAt(attackersPosition).getAttackingStrength();
 		int defenseStrength = game.getUnitAt(defendersPosition).getDefensiveStrength();
 		
-		attackStrength = (attackStrength + bonusFromUnitsAround(attackersPosition))*bonusFromTerrain(attackersPosition);
-		defenseStrength = (defenseStrength + bonusFromUnitsAround(defendersPosition))*bonusFromTerrain(defendersPosition);
+		attackStrength = (attackStrength + bonusFromUnitsAround(attackersPosition))*bonusFromTerrain(attackersPosition)*dice.rollDice();
+		defenseStrength = (defenseStrength + bonusFromUnitsAround(defendersPosition))*bonusFromTerrain(defendersPosition)*dice.rollDice();
 				
-		return (attackStrength > defenseStrength);
+		boolean theAttackersResult = (attackStrength > defenseStrength);
+		if(theAttackersResult == true) {
+			game.mapUnit.remove(defendersPosition);
+			game.mapUnit.put(defendersPosition, game.mapUnit.get(attackersPosition));
+			game.mapUnit.remove(attackersPosition);
+			return true;
+		}
+		else {
+			game.mapUnit.remove(attackersPosition);
+			return false;
+		}
 	}
 	
 	public int bonusFromUnitsAround(Position p) {
@@ -68,6 +83,7 @@ public class EpsilonAttackStrategy implements AttackingStrategy {
 	}
 	
 	public int bonusFromTerrain(Position p) {
+		//If your unit is at a city they will be owned by the same player..
 		City c = game.getCityAt(p);
 		if(c != null) {
 			return 3;
