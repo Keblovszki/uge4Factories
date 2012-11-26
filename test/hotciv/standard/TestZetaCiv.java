@@ -1,7 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
-import hotciv.different.*;
+import hotciv.factories.ZetaFactory;
 import hotciv.framework.*;
 
 import org.junit.Before;

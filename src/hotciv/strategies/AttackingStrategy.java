@@ -2,7 +2,6 @@ package hotciv.strategies;
 
 import hotciv.framework.*;
 import hotciv.standard.GameImpl;
-import hotciv.different.*;
 
 public interface AttackingStrategy {
 	
