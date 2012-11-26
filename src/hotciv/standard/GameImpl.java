@@ -165,6 +165,11 @@ public class GameImpl implements Game {
 	public int getRounds() {
 		return round;
 	}
+	
+	public void resetAttacks(){
+		attackConterRED = 0;
+		attackCounterBLUE = 0;
+	}
 
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
 		

@@ -127,4 +127,6 @@ public interface Game {
   public void createProductionInCityAt( Position p );
   
   public boolean attackUnit(Position from, Position to);
+  
+  public void resetAttacks();
 }

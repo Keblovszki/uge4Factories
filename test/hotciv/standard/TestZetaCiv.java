@@ -14,9 +14,15 @@ public class TestZetaCiv {
 	public void SetUp() {
 		game = new GameImpl(
 				new AlphaWorldAgingStrategy(),
-				new ZetaWinnerStrategy(),
+				new ZetaWinnerStrategy(new BetaWinnerStrategy(), new EpsilonWinnerStrategy()),
 				new AlphaUnitActionStrategy(), 
 				new TestWorldLayoutStrategy(),
 				new AlphaAttackStrategy() );
 	}
+	
+	@Test
+	public void attackThreeTimesAndWin() {
+		assertNull("No winner yet", game.getWinner());
+		}
+	
 }
