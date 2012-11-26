@@ -1,11 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
-import hotciv.different.AlphaAttackStrategy;
-import hotciv.different.AlphaUnitActionStrategy;
-import hotciv.different.AlphaWorldLayoutStrategy;
-import hotciv.different.BetaWinnerStrategy;
-import hotciv.different.BetaWorldAgingStrategy;
+import hotciv.factories.BetaFactory;
 import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
@@ -18,13 +14,7 @@ public class TestBetaCiv {
 	
 	@Before
 	public void setUp(){
-		//UnitActionStrategy is Alpha because they have the same UnitAction, namely nothing..
-		game = new GameImpl(
-				new BetaWorldAgingStrategy(),
-				new BetaWinnerStrategy(), 
-				new AlphaUnitActionStrategy(), 
-				new AlphaWorldLayoutStrategy(),
-				new AlphaAttackStrategy() );
+		game = new GameImpl( new BetaFactory() );
 	}
 	
 	@Test

@@ -1,7 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
-import hotciv.different.*;
+import hotciv.factories.*;
 import hotciv.framework.*;
 
 import org.junit.Before;
@@ -12,12 +12,7 @@ public class TestEpsilonCiv {
 	
 	@Before
 	public void SetUp() {
-		game = new GameImpl(
-				new AlphaWorldAgingStrategy(),
-				new EpsilonWinnerStrategy(),
-				new AlphaUnitActionStrategy(), 
-				new TestWorldLayoutStrategy(),
-				new EpsilonAttackStrategy(new TestDice()) );
+		game = new GameImpl( new EpsilonFactory() );
 	}
 	
 	@Test

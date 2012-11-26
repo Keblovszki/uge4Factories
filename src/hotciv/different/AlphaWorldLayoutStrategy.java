@@ -2,10 +2,12 @@ package hotciv.different;
 
 import java.util.*;
 
+
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.*;
+import hotciv.strategies.WorldLayoutStrategy;
 
 
 public class AlphaWorldLayoutStrategy implements WorldLayoutStrategy {

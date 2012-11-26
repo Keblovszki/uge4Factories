@@ -12,17 +12,11 @@ public class TestZetaCiv {
 	
 	@Before
 	public void SetUp() {
-		game = new GameImpl(
-				new AlphaWorldAgingStrategy(),
-				new ZetaWinnerStrategy(new BetaWinnerStrategy(), new EpsilonWinnerStrategy()),
-				new AlphaUnitActionStrategy(), 
-				new TestWorldLayoutStrategy(),
-				new AlphaAttackStrategy() );
+		game = new GameImpl( new ZetaFactory() );
 	}
 	
 	@Test
 	public void attackThreeTimesAndWin() {
 		assertNull("No winner yet", game.getWinner());
-		}
-	
+	}
 }

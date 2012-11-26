@@ -2,8 +2,10 @@ package hotciv.different;
 
 import java.util.HashMap;
 
+
 import hotciv.framework.*;
 import hotciv.standard.*;
+import hotciv.strategies.WorldLayoutStrategy;
 
 public class DeltaWorldLayoutStrategy implements WorldLayoutStrategy {
 	HashMap<Position, UnitImpl> mapUnit = new HashMap<Position, UnitImpl>();

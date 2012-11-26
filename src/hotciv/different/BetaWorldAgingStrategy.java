@@ -1,6 +1,6 @@
 package hotciv.different;
 
-import hotciv.standard.WorldAgingStrategy;
+import hotciv.strategies.WorldAgingStrategy;
 
 public class BetaWorldAgingStrategy implements WorldAgingStrategy{
 

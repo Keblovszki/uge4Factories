@@ -2,7 +2,7 @@ package hotciv.different;
 
 import hotciv.framework.Player;
 import hotciv.standard.GameImpl;
-import hotciv.standard.WinnerStrategy;
+import hotciv.strategies.WinnerStrategy;
 
 public class EpsilonWinnerStrategy implements WinnerStrategy {
 	private GameImpl game;

@@ -2,8 +2,10 @@ package hotciv.different;
 
 import java.util.*;
 
+
 import hotciv.framework.*;
 import hotciv.standard.*;
+import hotciv.strategies.AttackingStrategy;
 
 public class EpsilonAttackStrategy implements AttackingStrategy {
 	private GameImpl game;

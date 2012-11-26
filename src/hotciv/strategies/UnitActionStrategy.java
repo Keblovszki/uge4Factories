@@ -1,6 +1,7 @@
-package hotciv.standard;
+package hotciv.strategies;
 
 import hotciv.framework.*;
+import hotciv.standard.GameImpl;
 
 
 public interface UnitActionStrategy {

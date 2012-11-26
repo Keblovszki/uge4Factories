@@ -1,11 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
-import hotciv.different.AlphaAttackStrategy;
-import hotciv.different.AlphaUnitActionStrategy;
-import hotciv.different.AlphaWinnerStrategy;
-import hotciv.different.AlphaWorldAgingStrategy;
-import hotciv.different.DeltaWorldLayoutStrategy;
+import hotciv.factories.DeltaFactory;
 import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
@@ -21,12 +17,7 @@ public class TestDeltaCiv {
 	@Before
 	public void setUp(){
 		//UnitActionStrategy is Alpha because they have the same UnitAction, namely nothing..
-		game = new GameImpl(
-				new AlphaWorldAgingStrategy(), 
-				new AlphaWinnerStrategy(), 
-				new AlphaUnitActionStrategy(), 
-				new DeltaWorldLayoutStrategy(),
-				new AlphaAttackStrategy() );
+		game = new GameImpl( new DeltaFactory() );
 	}
 	
 	@Test

@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import hotciv.factories.AbstractFactory;
 import hotciv.framework.City;
 import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
@@ -7,8 +8,14 @@ import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.framework.Tile;
 import hotciv.framework.Unit;
+import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.UnitActionStrategy;
+import hotciv.strategies.WinnerStrategy;
+import hotciv.strategies.WorldAgingStrategy;
+import hotciv.strategies.WorldLayoutStrategy;
 
 import java.util.*;
+
 
 /**
  * Skeleton implementation of HotCiv.
@@ -38,13 +45,8 @@ public class GameImpl implements Game {
 	private int round = 1;
 	
 	//Constructor
-	public GameImpl(WorldAgingStrategy was, WinnerStrategy ws, UnitActionStrategy uas, WorldLayoutStrategy wls, AttackingStrategy as) {
+	public GameImpl(AbstractFactory abstractFactory) {
 		
-		worldAgingStrategy = was;
-		winnerStrategy = ws;
-		unitActionStrategy = uas;
-		worldLayoutStrategy = wls;
-		attackingStrategy = as;
 		
 		mapCity.putAll(worldLayoutStrategy.makeCityList());
 		mapUnit.putAll(worldLayoutStrategy.makeUnitList());

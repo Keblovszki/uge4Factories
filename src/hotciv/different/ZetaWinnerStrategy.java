@@ -2,7 +2,7 @@ package hotciv.different;
 
 import hotciv.framework.Player;
 import hotciv.standard.GameImpl;
-import hotciv.standard.WinnerStrategy;
+import hotciv.strategies.WinnerStrategy;
 
 public class ZetaWinnerStrategy implements WinnerStrategy {
 	private GameImpl game;
@@ -14,6 +14,7 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
 		winnerStrategy1 = ws1;
 		winnerStrategy2 = ws2;
 	}
+	
 	@Override
 	public Player winner() {
 		if(game.getRounds() < 20) {

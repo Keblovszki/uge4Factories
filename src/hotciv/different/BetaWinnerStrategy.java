@@ -2,6 +2,7 @@ package hotciv.different;
 
 import hotciv.framework.*;
 import hotciv.standard.*;
+import hotciv.strategies.WinnerStrategy;
 
 public class BetaWinnerStrategy implements WinnerStrategy {
 	private GameImpl game;

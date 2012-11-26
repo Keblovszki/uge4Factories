@@ -1,11 +1,7 @@
 package hotciv.standard;
 
 import static org.junit.Assert.*;
-import hotciv.different.AlphaAttackStrategy;
-import hotciv.different.AlphaWinnerStrategy;
-import hotciv.different.AlphaWorldAgingStrategy;
-import hotciv.different.AlphaWorldLayoutStrategy;
-import hotciv.different.GammaUnitActionStrategy;
+import hotciv.factories.GammaFactory;
 import hotciv.framework.*;
 
 import org.junit.Before;
@@ -16,12 +12,7 @@ public class TestGammaCiv {
 
 	@Before
 	public void setUp(){
-		game = new GameImpl(
-				new AlphaWorldAgingStrategy(),
-				new AlphaWinnerStrategy(),
-				new GammaUnitActionStrategy(), 
-				new AlphaWorldLayoutStrategy(),
-				new AlphaAttackStrategy() );
+		game = new GameImpl( new GammaFactory() );
 	}
 	
 	@Test
