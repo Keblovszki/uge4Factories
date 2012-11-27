@@ -18,10 +18,15 @@ public class ZetaWinnerStrategy implements WinnerStrategy {
 	@Override
 	public Player winner() {
 		if(game.getRounds() < 20) {
+			winnerStrategy1.setGame(this.game);
 			return winnerStrategy1.winner();
 		}
-		else{
+		else if(game.getRounds() == 20) {
 			game.resetAttacks();
+			return winnerStrategy1.winner();
+		}
+		else {
+			winnerStrategy2.setGame(this.game);
 			return winnerStrategy2.winner();
 		}
 	}

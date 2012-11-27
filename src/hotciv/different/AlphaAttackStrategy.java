@@ -26,7 +26,7 @@ public class AlphaAttackStrategy implements AttackingStrategy{
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	public void setUp(GameImpl game) {

@@ -1,21 +1,14 @@
 package hotciv.factories;
 
-import hotciv.different.AlphaUnitActionStrategy;
-import hotciv.different.AlphaWorldAgingStrategy;
-import hotciv.different.AlphaWorldLayoutStrategy;
-import hotciv.different.EpsilonAttackStrategy;
-import hotciv.different.EpsilonWinnerStrategy;
-import hotciv.strategies.AttackingStrategy;
-import hotciv.strategies.UnitActionStrategy;
-import hotciv.strategies.WinnerStrategy;
-import hotciv.strategies.WorldAgingStrategy;
-import hotciv.strategies.WorldLayoutStrategy;
+import hotciv.different.*;
+import hotciv.standard.*;
+import hotciv.strategies.*;
 
 public class EpsilonFactory implements AbstractFactory {
 
 	@Override
 	public AttackingStrategy makeAttackStrategy() {
-		return new EpsilonAttackStrategy(null);
+		return new EpsilonAttackStrategy(new TestDice());
 	}
 
 	@Override
@@ -35,6 +28,6 @@ public class EpsilonFactory implements AbstractFactory {
 
 	@Override
 	public WorldLayoutStrategy makeWorldLayoutStrategy() {
-		return new AlphaWorldLayoutStrategy();
+		return new TestWorldLayoutStrategy();
 	}
 }

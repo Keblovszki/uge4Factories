@@ -47,6 +47,11 @@ public class GameImpl implements Game {
 	//Constructor
 	public GameImpl(AbstractFactory abstractFactory) {
 		
+		winnerStrategy = abstractFactory.makeWinnerStrategy();
+		worldAgingStrategy = abstractFactory.makeWorldAgingStrategy();
+		unitActionStrategy = abstractFactory.makeUnitActionStrategy();
+		worldLayoutStrategy = abstractFactory.makeWorldLayoutStrategy();
+		attackingStrategy = abstractFactory.makeAttackStrategy();
 		
 		mapCity.putAll(worldLayoutStrategy.makeCityList());
 		mapUnit.putAll(worldLayoutStrategy.makeUnitList());
@@ -71,7 +76,7 @@ public class GameImpl implements Game {
 
 	public Player getWinner() {
 		winnerStrategy.setGame(this);
-		return winnerStrategy.winner();
+		return this.winnerStrategy.winner();
 	}
 
 	public int getAge() {
