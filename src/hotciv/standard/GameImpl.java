@@ -84,47 +84,23 @@ public class GameImpl implements Game {
 	}
 
 	public boolean moveUnit(Position from, Position to) {
-		//Moves your unit
-		if(mapUnit.get(to) == null ) {
-			if(mapUnit.get(from).isNotArcherFortify() == false) {
-				return false;
-			}
-			else{
-			mapUnit.put(to, mapUnit.get(from) );
-			mapUnit.remove(from);
-				if(mapCity.get(to) != null ) {
-					if(mapCity.get(to).getOwner() == mapUnit.get(to).getOwner()) {
-					return true;
-					}
-					else {
-						mapCity.get(to).setOwner(mapUnit.get(to).getOwner());
-						return true;
-					}
-				}
+		// Moves your unit
+		if (mapUnit.get(to) != null) {
+			return false;
+		}
+		if (mapUnit.get(from).isNotArcherFortify() == false) {
+			return false;
+		}
+		mapUnit.put(to, mapUnit.get(from));
+		mapUnit.remove(from);
+		if (mapCity.get(to) != null) {
+			if (mapCity.get(to).getOwner() == mapUnit.get(to).getOwner()) {
+				return true;
+			} else {
+				mapCity.get(to).setOwner(mapUnit.get(to).getOwner());
+				return true;
 			}
 		}
-		/*
-		//Attack another unit
-		else if(mapUnit.get(to) != null) {
-			if(mapUnit.get(from).isNotArcherFortify() == true) {
-				return false;
-			}
-			else{
-				mapUnit.remove(to);
-				mapUnit.put(to, mapUnit.get(from) );
-				mapUnit.remove(from);
-				if(mapCity.get(to) != null ) {
-					if(mapCity.get(to).getOwner() == mapUnit.get(to).getOwner()) {
-						return true;
-					}
-					else {
-						mapCity.get(to).setOwner(mapUnit.get(to).getOwner());
-						return true;
-					}
-				}
-			}
-		}
-		*/
 		return false;
 	}
 	
