@@ -1,18 +1,23 @@
 package hotciv.different;
 
-import java.util.*;
-
-
-import hotciv.framework.*;
-import hotciv.standard.*;
+import hotciv.framework.City;
+import hotciv.framework.Dice;
+import hotciv.framework.Game;
+import hotciv.framework.GameConstants;
+import hotciv.framework.Player;
+import hotciv.framework.Position;
+import hotciv.framework.Unit;
 import hotciv.strategies.AttackingStrategy;
 
+import java.util.ArrayList;
+
 public class EpsilonAttackStrategy implements AttackingStrategy {
-	private GameImpl game;
+	private Game game;
 	private Dice dice;
 	
-	public EpsilonAttackStrategy(Dice awesomeDice) {
+	public EpsilonAttackStrategy(Dice awesomeDice, Game game) {
 		dice = awesomeDice;
+		this.game = game;
 	}
 		
 	@Override
@@ -26,56 +31,23 @@ public class EpsilonAttackStrategy implements AttackingStrategy {
 				
 		boolean theAttackersResult = (attackStrength > defenseStrength);
 		if(theAttackersResult == true) {
-			game.mapUnit.remove(defendersPosition);
-			game.mapUnit.put(defendersPosition, game.mapUnit.get(attackersPosition));
-			game.mapUnit.remove(attackersPosition);
+			game.getMapUnit().remove(defendersPosition);
+			game.getMapUnit().put(defendersPosition, game.getMapUnit().get(attackersPosition));
+			game.getMapUnit().remove(attackersPosition);
 			return true;
 		}
 		else {
-			game.mapUnit.remove(attackersPosition);
+			game.getMapUnit().remove(attackersPosition);
 			return false;
 		}
 	}
 	
 	public int bonusFromUnitsAround(Position p) {
-		ArrayList<Unit> AllUnitsAround = new ArrayList<Unit>();
+		final ArrayList<Unit> allUnitsAround = game.getUnitAt(p).getUnitsAround(p);
 		int bonusFromAround = 0;
-		Unit N = game.getUnitAt(p.getNorth(p));
-		Unit NE = game.getUnitAt(p.getNorthEast(p));
-		Unit NW = game.getUnitAt(p.getNorthWest(p));
-		Unit W = game.getUnitAt(p.getWest(p));
-		Unit E = game.getUnitAt(p.getEast(p));
-		Unit SW = game.getUnitAt(p.getSouthWest(p));
-		Unit SE = game.getUnitAt(p.getSouthEast(p));
-		Unit S = game.getUnitAt(p.getSouth(p));
-		
-		if(N != null) {
-			AllUnitsAround.add(N);
-		}
-		if(NW != null) {
-			AllUnitsAround.add(NW);
-		}
-		if(NE != null) {
-			AllUnitsAround.add(NE);
-		}
-		if(E != null) {
-			AllUnitsAround.add(E);
-		}
-		if(W != null) {
-			AllUnitsAround.add(W);
-		}
-		if(S != null) {
-			AllUnitsAround.add(S);
-		}
-		if(SE != null) {
-			AllUnitsAround.add(SE);
-		}
-		if(SW != null) {
-			AllUnitsAround.add(SW);
-		}
 		
 		Player attackingPlayer = game.getUnitAt(p).getOwner();
-		for(Unit u : AllUnitsAround) {
+		for(Unit u : allUnitsAround) {
 			if(u.getOwner() == attackingPlayer) {
 				bonusFromAround += 1;
 			}
@@ -94,9 +66,5 @@ public class EpsilonAttackStrategy implements AttackingStrategy {
 			return 2;
 		}
 		return 1;
-	}
-	
-	public void setUp(GameImpl game) {
-		this.game = game;
 	}
 }

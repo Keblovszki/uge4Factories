@@ -1,33 +1,42 @@
 package hotciv.factories;
 
-import hotciv.different.*;
-import hotciv.standard.*;
-import hotciv.strategies.*;
+import hotciv.different.AlphaUnitActionStrategy;
+import hotciv.different.AlphaWorldAgingStrategy;
+import hotciv.different.EpsilonAttackStrategy;
+import hotciv.different.EpsilonWinnerStrategy;
+import hotciv.different.TestWorldLayoutStrategy;
+import hotciv.framework.Game;
+import hotciv.standard.TestDice;
+import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.UnitActionStrategy;
+import hotciv.strategies.WinnerStrategy;
+import hotciv.strategies.WorldAgingStrategy;
+import hotciv.strategies.WorldLayoutStrategy;
 
 public class EpsilonFactory implements AbstractFactory {
 
 	@Override
-	public AttackingStrategy makeAttackStrategy() {
-		return new EpsilonAttackStrategy(new TestDice());
+	public AttackingStrategy makeAttackStrategy(Game game) {
+		return new EpsilonAttackStrategy(new TestDice(), game);
 	}
 
 	@Override
-	public UnitActionStrategy makeUnitActionStrategy() {
-		return new AlphaUnitActionStrategy();
+	public UnitActionStrategy makeUnitActionStrategy(Game game) {
+		return new AlphaUnitActionStrategy(game);
 	}
 
 	@Override
-	public WinnerStrategy makeWinnerStrategy() {
-		return new EpsilonWinnerStrategy();
+	public WinnerStrategy makeWinnerStrategy(Game game) {
+		return new EpsilonWinnerStrategy(game);
 	}
 
 	@Override
-	public WorldAgingStrategy makeWorldAgingStrategy() {
-		return new AlphaWorldAgingStrategy();
+	public WorldAgingStrategy makeWorldAgingStrategy(Game game) {
+		return new AlphaWorldAgingStrategy(game);
 	}
 
 	@Override
-	public WorldLayoutStrategy makeWorldLayoutStrategy() {
-		return new TestWorldLayoutStrategy();
+	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game) {
+		return new TestWorldLayoutStrategy(game);
 	}
 }

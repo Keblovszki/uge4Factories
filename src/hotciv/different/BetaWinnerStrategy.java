@@ -1,18 +1,23 @@
 package hotciv.different;
 
-import hotciv.framework.*;
-import hotciv.standard.*;
+import hotciv.framework.City;
+import hotciv.framework.Game;
+import hotciv.framework.Player;
 import hotciv.strategies.WinnerStrategy;
 
 public class BetaWinnerStrategy implements WinnerStrategy {
-	private GameImpl game;
+	private Game game;
+	
+	public BetaWinnerStrategy(Game game) {
+		this.game = game;
+	}
 	
 	public Player winner() {
 		Player p = null;
 		Player owner = null;
 		Player owner1 = null;
 		
-		for(CityImpl c : this.game.getAllCities()) {
+		for(City c : this.game.getAllCities()) {
 			if(Player.RED == c.getOwner()) {
 				owner = c.getOwner();
 			}
@@ -28,11 +33,6 @@ public class BetaWinnerStrategy implements WinnerStrategy {
 		}
 		return p;
 	}
-	
-	public void setGame(GameImpl game) {
-		this.game = game;
-	}
-
 }
 
 	

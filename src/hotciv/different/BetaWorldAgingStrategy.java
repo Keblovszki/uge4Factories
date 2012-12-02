@@ -1,9 +1,16 @@
 package hotciv.different;
 
+import hotciv.framework.Game;
 import hotciv.strategies.WorldAgingStrategy;
 
 public class BetaWorldAgingStrategy implements WorldAgingStrategy{
-
+	@SuppressWarnings("unused")
+	private Game game;
+	
+	public BetaWorldAgingStrategy(Game game) {
+		this.game = game;
+	}
+	
 	@Override
 	public int worldAging(int age) {
 		//between 4000BC and 100BC

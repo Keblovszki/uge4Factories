@@ -6,6 +6,7 @@ public class CityImpl implements City {
 	private Player owner;
 	private int production;
 	private String unitProduction = null;
+	private int cityPopulation = 1;
 	
 	//Constructor
 	public CityImpl(Player p) {
@@ -18,13 +19,14 @@ public class CityImpl implements City {
 		return owner;
 	}
 	
+	@Override
 	public void setOwner(Player p) {
 		owner = p;
 	}
 
 	@Override
 	public int getSize() {
-		return 1;
+		return cityPopulation;
 	}
 
 	@Override
@@ -38,20 +40,22 @@ public class CityImpl implements City {
 	}
 	
 	@Override
-	public void doProductionSum(){
+	public void doProductionSum() {
 		production += 6;
 	}
 	
 	@Override
-	public int getProductionSum(){
+	public int getProductionSum() {
 		return production;
 	}
 	
-	public void setProductionSum(int change){
+	@Override
+	public void setProductionSum(int change) {
 		production += change; 
 	}
-	
-	public void setProduction(String unitType){
+
+	@Override
+	public void setProduction(String unitType) {
 		unitProduction = unitType;
 	}
 }

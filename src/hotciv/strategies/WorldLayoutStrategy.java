@@ -1,18 +1,18 @@
 package hotciv.strategies;
 
+import hotciv.framework.City;
 import hotciv.framework.Position;
-import hotciv.standard.CityImpl;
-import hotciv.standard.TileImpl;
-import hotciv.standard.UnitImpl;
+import hotciv.framework.Tile;
+import hotciv.framework.Unit;
 
 import java.util.HashMap;
 
 public interface WorldLayoutStrategy {
 	
-	public HashMap<Position, UnitImpl> makeUnitList();
+	public HashMap<Position, Unit> makeUnitList();
 	
-	public HashMap<Position, CityImpl> makeCityList();
+	public HashMap<Position, City> makeCityList();
 	
-	public HashMap<Position, TileImpl> makeTileList();
+	public HashMap<Position, Tile> makeTileList();
 
 }

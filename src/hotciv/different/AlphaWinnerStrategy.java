@@ -1,11 +1,15 @@
 package hotciv.different;
 
-import hotciv.framework.*;
-import hotciv.standard.*;
+import hotciv.framework.Game;
+import hotciv.framework.Player;
 import hotciv.strategies.WinnerStrategy;
 
 public class AlphaWinnerStrategy implements WinnerStrategy {
 	private Game game;
+	
+	public AlphaWinnerStrategy(Game game) {
+		this.game = game;
+	}
 	
 	@Override
 	public Player winner(){
@@ -15,10 +19,4 @@ public class AlphaWinnerStrategy implements WinnerStrategy {
 		}
 		return null;
 	}
-	
-	@Override
-	public void setGame(GameImpl game) {
-		this.game = game;
-	}
-
 }

@@ -41,7 +41,7 @@ public class TestGammaCiv {
 		assertEquals("The defenseStrength should be 6", 6, game.getUnitAt(p).getDefensiveStrength());
 		
 		//trying to move the archer but it shouldn't
-		assertFalse("moveUnit should return false", game.moveUnit(p, p.getEast(p)));
+		assertFalse("moveUnit should return false", game.moveUnit(p, p.getEast()));
 		assertNotNull("The archer stays at its position", game.getUnitAt(p));
 		assertEquals("The archer shouldn't move", game.getUnitAt(p).getTypeString(), GameConstants.ARCHER);
 		

@@ -1,5 +1,7 @@
 package hotciv.framework;
 
+import java.util.ArrayList;
+
 /** Represents a single unit in the game.
 
 Responsibilities:
@@ -59,4 +61,6 @@ public interface Unit {
   public void setIsNotFortify(boolean fortify);
   
   public boolean isNotArcherFortify();
+  
+  public ArrayList<Unit> getUnitsAround(Position p);
 }

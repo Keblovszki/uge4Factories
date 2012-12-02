@@ -1,17 +1,22 @@
 package hotciv.factories;
 
-import hotciv.strategies.*;
+import hotciv.framework.Game;
+import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.UnitActionStrategy;
+import hotciv.strategies.WinnerStrategy;
+import hotciv.strategies.WorldAgingStrategy;
+import hotciv.strategies.WorldLayoutStrategy;
 
 public interface AbstractFactory {
 
-	public AttackingStrategy makeAttackStrategy();
+	public AttackingStrategy makeAttackStrategy(Game game);
 	
-	public UnitActionStrategy makeUnitActionStrategy();
+	public UnitActionStrategy makeUnitActionStrategy(Game game);
 	
-	public WinnerStrategy makeWinnerStrategy();
+	public WinnerStrategy makeWinnerStrategy(Game game);
 	
-	public WorldAgingStrategy makeWorldAgingStrategy();
+	public WorldAgingStrategy makeWorldAgingStrategy(Game game);
 	
-	public WorldLayoutStrategy makeWorldLayoutStrategy();
+	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game);
 	
 }

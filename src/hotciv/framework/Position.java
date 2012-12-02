@@ -71,47 +71,47 @@ public class Position {
 		return "[" + r + "," + c + "]";
 	}
 
-	public Position getWest(Position p) {
-		return new Position(p.getRow(), p.getColumn() + 1);
+	public Position getWest() {
+		return new Position(getRow(), getColumn() + 1);
 	}
 	
-	public Position getEast(Position p) {
-		return new Position(p.getRow(), p.getColumn() - 1);
+	public Position getEast() {
+		return new Position(getRow(), getColumn() - 1);
 	}
 	
-	public Position getNorth(Position p) {
-		return new Position(p.getRow() - 1, p.getColumn());
+	public Position getNorth() {
+		return new Position(getRow() - 1, getColumn());
 	}
 	
-	public Position getSouth(Position p) {
-		return new Position(p.getRow() + 1, p.getColumn());
+	public Position getSouth() {
+		return new Position(getRow() + 1, getColumn());
 	}
 	
-	public Position getNorthEast(Position p) {
-		return new Position(p.getRow() - 1, p.getColumn() - 1);
+	public Position getNorthEast() {
+		return new Position(getRow() - 1, getColumn() - 1);
 	}
 	
-	public Position getNorthWest(Position p) {
-		return new Position(p.getRow() - 1, p.getColumn() + 1);
+	public Position getNorthWest() {
+		return new Position(getRow() - 1, getColumn() + 1);
 	}
 	
-	public Position getSouthWest(Position p) {
-		return new Position(p.getRow() + 1, p.getColumn() + 1);
+	public Position getSouthWest() {
+		return new Position(getRow() + 1, getColumn() + 1);
 	}
 	
-	public Position getSouthEast(Position p) {
-		return new Position(p.getRow() + 1, p.getColumn() - 1);
+	public Position getSouthEast() {
+		return new Position(getRow() + 1, getColumn() - 1);
 	}
 	
 	public ArrayList<Position> getNeighbours() {
-		final Position south = this.getSouth(this);
-		final Position north = this.getNorth(this);
-		final Position east = this.getEast(this);
-		final Position west = this.getWest(this);
-		final Position southWest = this.getSouthWest(this);
-		final Position southEast = this.getSouthEast(this);
-		final Position northWest = this.getNorthWest(this);
-		final Position northEast = this.getNorthEast(this);
+		final Position south = this.getSouth();
+		final Position north = this.getNorth();
+		final Position east = this.getEast();
+		final Position west = this.getWest();
+		final Position southWest = this.getSouthWest();
+		final Position southEast = this.getSouthEast();
+		final Position northWest = this.getNorthWest();
+		final Position northEast = this.getNorthEast();
 		final ArrayList<Position> aroundTheCity = new ArrayList<Position>();
 		
 		aroundTheCity.add(this);
@@ -123,6 +123,7 @@ public class Position {
 		aroundTheCity.add(southWest);
 		aroundTheCity.add(west);
 		aroundTheCity.add(northWest);
+		
 		return aroundTheCity;
 	}
 }

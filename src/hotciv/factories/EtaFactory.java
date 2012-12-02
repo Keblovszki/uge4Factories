@@ -4,7 +4,7 @@ import hotciv.different.AlphaAttackStrategy;
 import hotciv.different.AlphaUnitActionStrategy;
 import hotciv.different.AlphaWinnerStrategy;
 import hotciv.different.AlphaWorldAgingStrategy;
-import hotciv.different.DeltaWorldLayoutStrategy;
+import hotciv.different.TestWorldLayoutStrategy;
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
 import hotciv.strategies.UnitActionStrategy;
@@ -12,7 +12,7 @@ import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
 import hotciv.strategies.WorldLayoutStrategy;
 
-public class DeltaFactory implements AbstractFactory {
+public class EtaFactory implements AbstractFactory {
 
 	@Override
 	public AttackingStrategy makeAttackStrategy(Game game) {
@@ -36,7 +36,6 @@ public class DeltaFactory implements AbstractFactory {
 
 	@Override
 	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game) {
-		return new DeltaWorldLayoutStrategy(game);
+		return new TestWorldLayoutStrategy(game);
 	}
-
 }

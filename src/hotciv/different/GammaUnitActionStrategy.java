@@ -5,7 +5,11 @@ import hotciv.standard.*;
 import hotciv.strategies.UnitActionStrategy;
 
 public class GammaUnitActionStrategy implements UnitActionStrategy {
-	private GameImpl game;
+	private Game game;
+
+	public GammaUnitActionStrategy(Game game) {
+		this.game = game;
+	}
 
 	@Override
 	public void performUnitActionAt(Unit unit, Position p) {

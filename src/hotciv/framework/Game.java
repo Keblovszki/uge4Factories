@@ -1,5 +1,8 @@
 package hotciv.framework;
 
+import java.util.Collection;
+import java.util.HashMap;
+
 /** Game is the central interface allowing a client to access and
  * modify the state of a HotCiv game.  
    This source code is from the book 
@@ -129,4 +132,26 @@ public interface Game {
   public boolean attackUnit(Position from, Position to);
   
   public void resetAttacks();
+  
+  public HashMap<Position, City> getMapCity();
+
+  public void setMapCity(HashMap<Position, City> mapCity);
+  
+  public HashMap<Position, Unit> getMapUnit();
+
+  public void setMapUnit(HashMap<Position, Unit> mapUnit);
+  
+  public HashMap<Position, Tile> getMapTile();
+
+  public void setMapTile(HashMap<Position, Tile> mapTile);
+  
+  public void addCity(Position p, Player owner);
+
+  public Collection<City> getAllCities();
+  
+  public int countWins(Player p);
+
+  public void removeUnit(Position p);
+
+public int getRounds();
 }

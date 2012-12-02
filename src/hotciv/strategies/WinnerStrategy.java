@@ -1,11 +1,9 @@
 package hotciv.strategies;
 
-import hotciv.framework.*;
-import hotciv.standard.GameImpl;
+import hotciv.framework.Player;
 
 public interface WinnerStrategy {
 	
 	public Player winner();
-	public void setGame(GameImpl game);
 
 }

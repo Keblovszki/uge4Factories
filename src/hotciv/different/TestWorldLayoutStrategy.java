@@ -1,41 +1,54 @@
 package hotciv.different;
 
-import java.util.*;
-
-
+import hotciv.framework.City;
+import hotciv.framework.Game;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
-import hotciv.standard.*;
+import hotciv.framework.Tile;
+import hotciv.framework.Unit;
+import hotciv.standard.CityImpl;
+import hotciv.standard.TileImpl;
+import hotciv.standard.UnitImpl;
 import hotciv.strategies.WorldLayoutStrategy;
+
+import java.util.HashMap;
 
 
 public class TestWorldLayoutStrategy implements WorldLayoutStrategy {
-	HashMap<Position, UnitImpl> mapUnit = new HashMap<Position, UnitImpl>();
-	HashMap<Position, CityImpl> mapCity = new HashMap<Position, CityImpl>();
-	HashMap<Position, TileImpl> mapTile = new HashMap<Position, TileImpl>();
+	private Game game;
 	
-	public HashMap<Position, UnitImpl> makeUnitList() {
-		mapUnit.put(new Position(2, 0), new UnitImpl(Player.RED, GameConstants.ARCHER) );
-		mapUnit.put(new Position(3, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
-		mapUnit.put(new Position(4, 3), new UnitImpl(Player.RED, GameConstants.SETTLER) );
-		mapUnit.put(new Position(2, 1), new UnitImpl(Player.RED, GameConstants.ARCHER) );
-		mapUnit.put(new Position(1, 0), new UnitImpl(Player.RED, GameConstants.ARCHER) );
-		mapUnit.put(new Position(2, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
-		mapUnit.put(new Position(3, 3), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
-		mapUnit.put(new Position(0, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
-		mapUnit.put(new Position(4, 1), new UnitImpl(Player.BLUE, GameConstants.LEGION) );
+	public TestWorldLayoutStrategy(Game game) {
+		this.game = game;
+	}
+
+	public HashMap<Position, Unit> makeUnitList() {
+		HashMap<Position, Unit> mapUnit = new HashMap<Position, Unit>();
+
+		mapUnit.put(new Position(2, 0), new UnitImpl(Player.RED, GameConstants.ARCHER, game) );
+		mapUnit.put(new Position(3, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION, game) );
+		mapUnit.put(new Position(4, 3), new UnitImpl(Player.RED, GameConstants.SETTLER, game) );
+		mapUnit.put(new Position(2, 1), new UnitImpl(Player.RED, GameConstants.ARCHER, game) );
+		mapUnit.put(new Position(1, 0), new UnitImpl(Player.RED, GameConstants.ARCHER, game) );
+		mapUnit.put(new Position(2, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION, game) );
+		mapUnit.put(new Position(3, 3), new UnitImpl(Player.BLUE, GameConstants.LEGION, game) );
+		mapUnit.put(new Position(0, 2), new UnitImpl(Player.BLUE, GameConstants.LEGION, game) );
+		mapUnit.put(new Position(4, 1), new UnitImpl(Player.BLUE, GameConstants.LEGION, game) );
 		
 		return mapUnit;
 	}
 	
-	public HashMap<Position, CityImpl> makeCityList() {
+	public HashMap<Position, City> makeCityList() {
+		HashMap<Position, City> mapCity = new HashMap<Position, City>();
+
 		mapCity.put(new Position(1, 1), new CityImpl(Player.RED));
 		mapCity.put(new Position(4, 1), new CityImpl(Player.BLUE));
 		return mapCity;
 	}
 	
-	public HashMap<Position, TileImpl> makeTileList() {
+	public HashMap<Position, Tile> makeTileList() {
+		HashMap<Position, Tile> mapTile = new HashMap<Position, Tile>();
+
 		for(int i = 0; i < 16; i++) {
 			for (int j = 0; j < 16; j++) {
 				mapTile.put(new Position(i, j), new TileImpl(new Position(i, j), GameConstants.PLAINS));

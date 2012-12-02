@@ -50,4 +50,11 @@ public interface City {
   
   /* @return the production in the city */
   public int getProductionSum();
+  
+  /* set the owner of the city */
+  public void setOwner(Player p);
+  
+  public void setProductionSum(int change);
+  
+  public void setProduction(String unitType);
 }

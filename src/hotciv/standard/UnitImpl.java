@@ -1,7 +1,10 @@
 package hotciv.standard;
+import java.util.ArrayList;
+
 import hotciv.framework.*;
 
 public class UnitImpl implements Unit{
+	private Game game;
 	private String type;
 	private Player owner;
 	private int defenseStrength = 0;
@@ -10,9 +13,12 @@ public class UnitImpl implements Unit{
 	private boolean isFortify = false;
 	
 	//Constructor
-	public UnitImpl(Player p, String t){
-		owner = p;
-		type = t;
+	public UnitImpl(Player owner, String type, Game game){
+		this.owner = owner;
+		this.type = type;
+		this.game = game;
+		
+		
 		
 	}
 	
@@ -82,6 +88,46 @@ public class UnitImpl implements Unit{
 			return true;
 		}
 		return false;
+	}
+	 
+	@Override
+	public ArrayList<Unit> getUnitsAround(Position p) {
+		ArrayList<Unit> allUnitsAround = new ArrayList<Unit>();
+		Unit N = game.getUnitAt(p.getNorth());
+		Unit NE = game.getUnitAt(p.getNorthEast());
+		Unit NW = game.getUnitAt(p.getNorthWest());
+		Unit W = game.getUnitAt(p.getWest());
+		Unit E = game.getUnitAt(p.getEast());
+		Unit SW = game.getUnitAt(p.getSouthWest());
+		Unit SE = game.getUnitAt(p.getSouthEast());
+		Unit S = game.getUnitAt(p.getSouth());
+		
+		if(N != null) {
+			allUnitsAround.add(N);
+		}
+		if(NW != null) {
+			allUnitsAround.add(NW);
+		}
+		if(NE != null) {
+			allUnitsAround.add(NE);
+		}
+		if(E != null) {
+			allUnitsAround.add(E);
+		}
+		if(W != null) {
+			allUnitsAround.add(W);
+		}
+		if(S != null) {
+			allUnitsAround.add(S);
+		}
+		if(SE != null) {
+			allUnitsAround.add(SE);
+		}
+		if(SW != null) {
+			allUnitsAround.add(SW);
+		}
+		
+		return allUnitsAround;
 	}
 
 }
