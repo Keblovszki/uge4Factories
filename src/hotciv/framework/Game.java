@@ -145,10 +145,6 @@ public interface Game {
 
   public void setMapTile(HashMap<Position, Tile> mapTile);
   
-  public HashMap<String, Integer> getMapTilesAroundCity();
-  
-  public void setMapTilesAroundCity(HashMap<String, Integer> mapTilesAroundCity);
-  
   public void addCity(Position p, Player owner);
 
   public Collection<City> getAllCities();

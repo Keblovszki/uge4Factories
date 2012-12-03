@@ -9,12 +9,27 @@ import hotciv.standard.UnitImpl;
 import hotciv.strategies.ProductionStrategy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EtaProductionStrategy implements ProductionStrategy {
 	
 	private Game game;
+	private HashMap<String, Integer> mapTilesAroundCity;
+	private int plainsCount = 0;
+	private int oceanCount = 0;
+	private int hillCount = 0;
+	private int mountainCount = 0;
+	private int forestCount = 0;
+
 	
 	public EtaProductionStrategy(Game game) {
+		setMapTilesAroundCity(new HashMap<String, Integer>());
+		getMapTilesAroundCity().put(GameConstants.PLAINS, plainsCount);
+		getMapTilesAroundCity().put(GameConstants.FOREST, forestCount);
+		getMapTilesAroundCity().put(GameConstants.OCEANS, oceanCount);
+		getMapTilesAroundCity().put(GameConstants.MOUNTAINS, mountainCount);
+		getMapTilesAroundCity().put(GameConstants.HILLS, hillCount);
+		
 		this.game = game;
 	}
 
@@ -26,6 +41,29 @@ public class EtaProductionStrategy implements ProductionStrategy {
 		//add all tiles around the city to an ArrayList.
 		for (Position currentPosition : postitionsAroundTheCity) {
 			tilesAroundCity.add(game.getTileAt(currentPosition));
+		}
+		
+		for (Tile tile : tilesAroundCity) {
+			if (tile.getTypeString() == GameConstants.PLAINS) {
+				plainsCount += 1;
+				getMapTilesAroundCity().put(GameConstants.PLAINS, plainsCount);
+			}
+			else if (tile.getTypeString() == GameConstants.OCEANS) {
+				oceanCount += 1;
+				getMapTilesAroundCity().put(GameConstants.OCEANS, oceanCount);
+			}
+			else if (tile.getTypeString() == GameConstants.MOUNTAINS) {
+				mountainCount += 1;
+				getMapTilesAroundCity().put(GameConstants.OCEANS, mountainCount);
+			}
+			else if (tile.getTypeString() == GameConstants.HILLS) {
+				hillCount += 1;
+				getMapTilesAroundCity().put(GameConstants.OCEANS, hillCount);
+			}
+			else if (tile.getTypeString() == GameConstants.FOREST) {
+				forestCount += 1;
+				getMapTilesAroundCity().put(GameConstants.OCEANS, forestCount);
+			}
 		}
 		
 		// Archer costs 10 production
@@ -50,6 +88,14 @@ public class EtaProductionStrategy implements ProductionStrategy {
 				}
 			}
 		}
+	}
+	
+	public HashMap<String, Integer> getMapTilesAroundCity() {
+		return mapTilesAroundCity;
+	}
+
+	public void setMapTilesAroundCity(HashMap<String, Integer> mapTilesAroundCity) {
+		this.mapTilesAroundCity = mapTilesAroundCity;
 	}
 
 }

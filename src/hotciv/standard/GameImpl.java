@@ -35,7 +35,6 @@ public class GameImpl implements Game {
 	private HashMap<Position, City> mapCity;
 	private HashMap<Position, Unit> mapUnit;
 	private HashMap<Position, Tile> mapTile;
-	private HashMap<String, Integer> mapTilesAroundCity;
 	public int attackConterRED = 0;
 	public int attackCounterBLUE = 0;
 	private WorldAgingStrategy worldAgingStrategy;
@@ -51,7 +50,6 @@ public class GameImpl implements Game {
 		setMapCity(new HashMap<Position, City>());
 		setMapUnit(new HashMap<Position, Unit>());
 		setMapTile(new HashMap<Position, Tile>());
-		setMapTilesAroundCity(new HashMap<String, Integer>());
 
 		winnerStrategy = abstractFactory.makeWinnerStrategy(this);
 		worldAgingStrategy = abstractFactory.makeWorldAgingStrategy(this);
@@ -63,11 +61,6 @@ public class GameImpl implements Game {
 		getMapCity().putAll(worldLayoutStrategy.makeCityList());
 		getMapUnit().putAll(worldLayoutStrategy.makeUnitList());
 		getMapTile().putAll(worldLayoutStrategy.makeTileList());
-		getMapTilesAroundCity().put(GameConstants.PLAINS, 0);
-		getMapTilesAroundCity().put(GameConstants.FOREST, 0);
-		getMapTilesAroundCity().put(GameConstants.OCEANS, 0);
-		getMapTilesAroundCity().put(GameConstants.MOUNTAINS, 0);
-		getMapTilesAroundCity().put(GameConstants.HILLS, 0);
 	}
 
 	@Override
@@ -236,15 +229,5 @@ public class GameImpl implements Game {
 	@Override
 	public void setMapTile(HashMap<Position, Tile> mapTile) {
 		this.mapTile = mapTile;
-	}
-
-	@Override
-	public HashMap<String, Integer> getMapTilesAroundCity() {
-		return mapTilesAroundCity;
-	}
-
-	@Override
-	public void setMapTilesAroundCity(HashMap<String, Integer> mapTilesAroundCity) {
-		this.mapTilesAroundCity = mapTilesAroundCity;
 	}
 }
