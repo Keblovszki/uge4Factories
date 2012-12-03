@@ -7,6 +7,7 @@ public class CityImpl implements City {
 	private int production;
 	private String unitProduction = null;
 	private int cityPopulation = 1;
+	private String workforceFocus = null;
 	
 	//Constructor
 	public CityImpl(Player p) {
@@ -36,7 +37,12 @@ public class CityImpl implements City {
 	
 	@Override
 	public String getWorkforceFocus() {
-		return null;
+		return workforceFocus;
+	}
+	
+	@Override
+	public void setWorkforceFocus(String balance){
+		workforceFocus = balance;
 	}
 	
 	@Override

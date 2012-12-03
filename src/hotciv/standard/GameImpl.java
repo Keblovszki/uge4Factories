@@ -9,13 +9,13 @@ import hotciv.framework.Position;
 import hotciv.framework.Tile;
 import hotciv.framework.Unit;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
 import hotciv.strategies.WorldLayoutStrategy;
 
 import java.util.*;
-
 
 /**
  * Skeleton implementation of HotCiv.
@@ -35,6 +35,7 @@ public class GameImpl implements Game {
 	private HashMap<Position, City> mapCity;
 	private HashMap<Position, Unit> mapUnit;
 	private HashMap<Position, Tile> mapTile;
+	private HashMap<String, Integer> mapTilesAroundCity;
 	public int attackConterRED = 0;
 	public int attackCounterBLUE = 0;
 	private WorldAgingStrategy worldAgingStrategy;
@@ -42,25 +43,33 @@ public class GameImpl implements Game {
 	private UnitActionStrategy unitActionStrategy;
 	private WorldLayoutStrategy worldLayoutStrategy;
 	private AttackingStrategy attackingStrategy;
+	private ProductionStrategy productionStrategy;
 	private int round = 1;
-	
-	//Constructor
+
+	// Constructor
 	public GameImpl(AbstractFactory abstractFactory) {
 		setMapCity(new HashMap<Position, City>());
 		setMapUnit(new HashMap<Position, Unit>());
 		setMapTile(new HashMap<Position, Tile>());
+		setMapTilesAroundCity(new HashMap<String, Integer>());
 
 		winnerStrategy = abstractFactory.makeWinnerStrategy(this);
 		worldAgingStrategy = abstractFactory.makeWorldAgingStrategy(this);
 		unitActionStrategy = abstractFactory.makeUnitActionStrategy(this);
 		worldLayoutStrategy = abstractFactory.makeWorldLayoutStrategy(this);
 		attackingStrategy = abstractFactory.makeAttackStrategy(this);
-		
+		productionStrategy = abstractFactory.makeProductionStrategy(this);
+
 		getMapCity().putAll(worldLayoutStrategy.makeCityList());
 		getMapUnit().putAll(worldLayoutStrategy.makeUnitList());
 		getMapTile().putAll(worldLayoutStrategy.makeTileList());
+		getMapTilesAroundCity().put(GameConstants.PLAINS, 0);
+		getMapTilesAroundCity().put(GameConstants.FOREST, 0);
+		getMapTilesAroundCity().put(GameConstants.OCEANS, 0);
+		getMapTilesAroundCity().put(GameConstants.MOUNTAINS, 0);
+		getMapTilesAroundCity().put(GameConstants.HILLS, 0);
 	}
-	
+
 	@Override
 	public Tile getTileAt(Position p) {
 		return getMapTile().get(p);
@@ -113,11 +122,11 @@ public class GameImpl implements Game {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean attackUnit(Position from, Position to) {
 		if (getMapUnit().get(to) != null) {
-			//this.attackingStrategy.setUp(this);
+			// this.attackingStrategy.setUp(this);
 			boolean rota = this.attackingStrategy.resultOfTheAttack(from, to);
 			if (rota == true) {
 				if (getUnitAt(to).getOwner() == Player.RED) {
@@ -131,43 +140,41 @@ public class GameImpl implements Game {
 		}
 		return false;
 	}
-	
+
 	public int countWins(Player p) {
-		if(p == Player.RED) {
+		if (p == Player.RED) {
 			return attackConterRED;
-		}
-		else {
+		} else {
 			return attackCounterBLUE;
 		}
 	}
 
 	@Override
 	public void endOfTurn() {
-		if(playerInTurn == Player.RED){
+		if (playerInTurn == Player.RED) {
 			playerInTurn = Player.BLUE;
-		}
-		else{
+		} else {
 			age = worldAgingStrategy.worldAging(age);
 			playerInTurn = Player.RED;
-			for(City c : getMapCity().values()){
+			for (City c : getMapCity().values()) {
 				c.doProductionSum();
 			}
 			round += 1;
 		}
 	}
-	
+
 	public int getRounds() {
 		return round;
 	}
-	
-	public void resetAttacks(){
+
+	public void resetAttacks() {
 		attackConterRED = 0;
 		attackCounterBLUE = 0;
 	}
 
 	@Override
 	public void changeWorkForceFocusInCityAt(Position p, String balance) {
-		
+		getMapCity().get(p).setWorkforceFocus(balance);
 	}
 
 	@Override
@@ -178,31 +185,15 @@ public class GameImpl implements Game {
 	@Override
 	public void performUnitActionAt(Position p) {
 		// unitActionStrategy.setGame(this);
-		Unit u = getMapUnit().get(p); 
+		Unit u = getMapUnit().get(p);
 		unitActionStrategy.performUnitActionAt(u, p);
 	}
-	
+
 	@Override
 	public void createProductionInCityAt(Position p) {
-		final ArrayList<Position> aroundTheCity = p.getNeighbours();
-		
-		//Archer costs 10 production
-		//Legions costs 15 production
-		//Settler costs 30 production
-		if(getMapCity().get(p) != null) {
-			City c = getMapCity().get(p);
-			if(c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
-				for(Position currentPosition : aroundTheCity) {
-					if(getMapUnit().get(currentPosition) == null) {
-						getMapUnit().put(currentPosition, new UnitImpl(c.getOwner(), c.getProduction(), this));
-						break;
-					}
-				}
-				c.setProductionSum(- GameConstants.costMap.get(c.getProduction()));
-			}
-		}
-	}	
-	
+		productionStrategy.createProductionInCityAt(p);
+	}
+
 	public void removeUnit(Position p) {
 		getMapUnit().remove(p);
 	}
@@ -211,7 +202,7 @@ public class GameImpl implements Game {
 	public void addCity(Position p, Player owner) {
 		getMapCity().put(p, new CityImpl(owner));
 	}
-	
+
 	@Override
 	public Collection<City> getAllCities() {
 		return getMapCity().values();
@@ -245,5 +236,15 @@ public class GameImpl implements Game {
 	@Override
 	public void setMapTile(HashMap<Position, Tile> mapTile) {
 		this.mapTile = mapTile;
+	}
+
+	@Override
+	public HashMap<String, Integer> getMapTilesAroundCity() {
+		return mapTilesAroundCity;
+	}
+
+	@Override
+	public void setMapTilesAroundCity(HashMap<String, Integer> mapTilesAroundCity) {
+		this.mapTilesAroundCity = mapTilesAroundCity;
 	}
 }

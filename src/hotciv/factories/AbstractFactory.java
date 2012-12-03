@@ -2,6 +2,7 @@ package hotciv.factories;
 
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
@@ -18,5 +19,7 @@ public interface AbstractFactory {
 	public WorldAgingStrategy makeWorldAgingStrategy(Game game);
 	
 	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game);
+	
+	public ProductionStrategy makeProductionStrategy(Game game);
 	
 }

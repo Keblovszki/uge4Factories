@@ -1,12 +1,14 @@
 package hotciv.factories;
 
 import hotciv.different.AlphaAttackStrategy;
+import hotciv.different.AlphaProductionStrategy;
 import hotciv.different.AlphaUnitActionStrategy;
 import hotciv.different.AlphaWorldLayoutStrategy;
 import hotciv.different.BetaWinnerStrategy;
 import hotciv.different.BetaWorldAgingStrategy;
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
@@ -37,6 +39,11 @@ public class BetaFactory implements AbstractFactory {
 	@Override
 	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game) {
 		return new AlphaWorldLayoutStrategy(game);
+	}
+	
+	@Override
+	public ProductionStrategy makeProductionStrategy(Game game) {
+		return new AlphaProductionStrategy(game);
 	}
 
 }

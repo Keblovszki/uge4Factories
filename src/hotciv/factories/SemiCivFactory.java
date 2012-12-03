@@ -4,10 +4,12 @@ import hotciv.different.BetaWorldAgingStrategy;
 import hotciv.different.DeltaWorldLayoutStrategy;
 import hotciv.different.EpsilonAttackStrategy;
 import hotciv.different.EpsilonWinnerStrategy;
+import hotciv.different.EtaProductionStrategy;
 import hotciv.different.GammaUnitActionStrategy;
 import hotciv.framework.Game;
 import hotciv.standard.TestDice;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
@@ -38,6 +40,11 @@ public class SemiCivFactory implements AbstractFactory {
 	@Override
 	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game) {
 		return new DeltaWorldLayoutStrategy(game);
+	}
+	
+	@Override
+	public ProductionStrategy makeProductionStrategy(Game game) {
+		return new EtaProductionStrategy(game);
 	}
 
 }

@@ -18,6 +18,8 @@ import java.util.HashMap;
  */
 public class GameConstants {
 	public static final HashMap<String, Integer> costMap = new HashMap<String, Integer>();
+	public static final HashMap<String, Integer> foodMap = new HashMap<String, Integer>();
+	public static final HashMap<String, Integer> productionMap = new HashMap<String, Integer>();
 	// The size of the world is set permanently to a 16x16 grid
 	public static final int WORLDSIZE = 16;
 	// Valid unit types
@@ -38,5 +40,21 @@ public class GameConstants {
 		costMap.put(ARCHER, 10);
 		costMap.put(LEGION, 15);
 		costMap.put(SETTLER, 30);
+	}
+	// Map for food production
+	static{
+		foodMap.put(PLAINS, 3);
+		foodMap.put(OCEANS, 1);
+		foodMap.put(FOREST, 0);
+		foodMap.put(MOUNTAINS, 0);
+		foodMap.put(HILLS, 0);
+	}
+	// Map for unit production
+	static{
+		productionMap.put(PLAINS, 0);
+		productionMap.put(OCEANS, 0);
+		productionMap.put(FOREST, 3);
+		productionMap.put(MOUNTAINS, 1);
+		productionMap.put(HILLS, 2);
 	}
 }

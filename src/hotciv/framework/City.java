@@ -57,4 +57,6 @@ public interface City {
   public void setProductionSum(int change);
   
   public void setProduction(String unitType);
+  
+  public void setWorkforceFocus(String balance);
 }

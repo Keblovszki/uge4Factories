@@ -1,6 +1,7 @@
 package hotciv.factories;
 
 import hotciv.different.AlphaAttackStrategy;
+import hotciv.different.AlphaProductionStrategy;
 import hotciv.different.AlphaUnitActionStrategy;
 import hotciv.different.AlphaWorldAgingStrategy;
 import hotciv.different.BetaWinnerStrategy;
@@ -9,6 +10,7 @@ import hotciv.different.TestWorldLayoutStrategy;
 import hotciv.different.ZetaWinnerStrategy;
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
@@ -39,6 +41,11 @@ public class ZetaFactory implements AbstractFactory {
 	@Override
 	public WorldLayoutStrategy makeWorldLayoutStrategy(Game game) {
 		return new TestWorldLayoutStrategy(game);
+	}
+	
+	@Override
+	public ProductionStrategy makeProductionStrategy(Game game) {
+		return new AlphaProductionStrategy(game);
 	}
 
 }

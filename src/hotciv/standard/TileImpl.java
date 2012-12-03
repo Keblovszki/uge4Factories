@@ -1,7 +1,7 @@
 package hotciv.standard;
-
 import hotciv.framework.Position;
 import hotciv.framework.Tile;
+
 
 public class TileImpl implements Tile {
 	private String type;
@@ -22,5 +22,5 @@ public class TileImpl implements Tile {
 	public String getTypeString() {		
 		return type;
 	}
-
+	
 }
