@@ -36,4 +36,10 @@ public class AlphaProductionStrategy implements ProductionStrategy {
 			}
 		}
 	}
+	
+	public void doProductionSum() {
+		for (City c : game.getMapCity().values()) {
+			c.doProductionSum();
+		}
+	}
 }

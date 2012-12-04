@@ -1,5 +1,6 @@
 package hotciv.framework;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,6 +20,8 @@ import java.util.HashMap;
 public class GameConstants {
 	public static final HashMap<String, Integer> costMap = new HashMap<String, Integer>();
 	public static final HashMap<String, Integer> foodMap = new HashMap<String, Integer>();
+	public static final ArrayList<String> costList = new ArrayList<String>();
+	public static final ArrayList<String> foodList = new ArrayList<String>();
 	public static final HashMap<String, Integer> productionMap = new HashMap<String, Integer>();
 	// The size of the world is set permanently to a 16x16 grid
 	public static final int WORLDSIZE = 16;
@@ -42,7 +45,7 @@ public class GameConstants {
 		costMap.put(SETTLER, 30);
 	}
 	// Map for food production
-	static{
+	static {
 		foodMap.put(PLAINS, 3);
 		foodMap.put(OCEANS, 1);
 		foodMap.put(FOREST, 0);
@@ -50,11 +53,30 @@ public class GameConstants {
 		foodMap.put(HILLS, 0);
 	}
 	// Map for unit production
-	static{
+	static {
 		productionMap.put(PLAINS, 0);
 		productionMap.put(OCEANS, 0);
 		productionMap.put(FOREST, 3);
 		productionMap.put(MOUNTAINS, 1);
 		productionMap.put(HILLS, 2);
 	}
+
+	static {
+		foodList.add(PLAINS);
+		foodList.add(OCEANS);
+		foodList.add("CITY");
+		foodList.add(MOUNTAINS);
+		foodList.add(HILLS);
+		foodList.add(FOREST);
+	}
+	
+	static {
+		costList.add(FOREST);
+		costList.add(HILLS);
+		costList.add(MOUNTAINS);
+		costList.add("CITY");
+		costList.add(OCEANS);
+		costList.add(PLAINS);
+	}
+
 }

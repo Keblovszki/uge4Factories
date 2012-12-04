@@ -3,7 +3,6 @@ package hotciv.standard;
 import hotciv.factories.AbstractFactory;
 import hotciv.framework.City;
 import hotciv.framework.Game;
-import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.framework.Tile;
@@ -149,9 +148,7 @@ public class GameImpl implements Game {
 		} else {
 			age = worldAgingStrategy.worldAging(age);
 			playerInTurn = Player.RED;
-			for (City c : getMapCity().values()) {
-				c.doProductionSum();
-			}
+			productionStrategy.doProductionSum();
 			round += 1;
 		}
 	}

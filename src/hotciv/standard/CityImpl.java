@@ -8,11 +8,14 @@ public class CityImpl implements City {
 	private String unitProduction = null;
 	private int cityPopulation = 1;
 	private String workforceFocus = null;
+	private int productionChange = 6;
+	private int foodProduction;
 	
 	//Constructor
 	public CityImpl(Player p) {
 		owner = p;
 		production = 0;
+		setFoodProduction(0);
 	}
 	
 	@Override
@@ -40,19 +43,24 @@ public class CityImpl implements City {
 		return workforceFocus;
 	}
 	
-	@Override
+	@Override 
 	public void setWorkforceFocus(String balance){
 		workforceFocus = balance;
 	}
 	
 	@Override
 	public void doProductionSum() {
-		production += 6;
+		production += productionChange;
 	}
 	
 	@Override
 	public int getProductionSum() {
 		return production;
+	}
+	
+	@Override
+	public void setProductionChange(int change) {
+		productionChange = change; 
 	}
 	
 	@Override
@@ -63,5 +71,15 @@ public class CityImpl implements City {
 	@Override
 	public void setProduction(String unitType) {
 		unitProduction = unitType;
+	}
+
+	@Override
+	public int getFoodProduction() {
+		return foodProduction;
+	}
+
+	@Override
+	public void setFoodProduction(int foodProduction) {
+		this.foodProduction = foodProduction;
 	}
 }

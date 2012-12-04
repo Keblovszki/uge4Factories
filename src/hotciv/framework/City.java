@@ -54,9 +54,15 @@ public interface City {
   /* set the owner of the city */
   public void setOwner(Player p);
   
-  public void setProductionSum(int change);
+  public void setProductionChange(int change);
   
   public void setProduction(String unitType);
   
   public void setWorkforceFocus(String balance);
+  
+  public void setProductionSum(int change);
+  
+	public int getFoodProduction();
+	
+	public void setFoodProduction(int foodProduction);
 }
