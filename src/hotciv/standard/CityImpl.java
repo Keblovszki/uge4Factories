@@ -15,7 +15,7 @@ public class CityImpl implements City {
 	public CityImpl(Player p) {
 		owner = p;
 		production = 0;
-		setFoodProduction(0);
+		foodProduction = 0;
 	}
 	
 	@Override

@@ -22,4 +22,13 @@ public class TestEtaCiv {
 		assertNotNull("There is a city at position (1, 1)", c);
 		assertEquals("The city here should be red", c, c);
 	}
+	
+	@Test
+	public void productionInRedShouldBeSomething() {
+		City c = game.getCityAt(new Position(1, 1));
+		assertEquals("The production is 0", c.getProductionSum(), 0);
+		c.setProduction(GameConstants.ARCHER);
+		game.endOfTurn(); game.endOfTurn();
+		assertEquals("Still the same", c.getProductionSum(), 0);
+	}
 }

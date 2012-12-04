@@ -24,7 +24,7 @@ public class TestAlphaCiv {
 	/** Fixture for alphaciv testing. */
 	@Before
 	public void setUp() {
-		game = new GameImpl( new AlphaFactory() );
+		game = new GameImpl(new AlphaFactory());
 	}
 
 	@Test
@@ -267,106 +267,106 @@ public class TestAlphaCiv {
 	@Test
 	public void makeSettler() {
 		City c = game.getCityAt(new Position(1, 1));
-		game.changeProductionInCityAt(new Position (1, 1), GameConstants.SETTLER);
+		game.changeProductionInCityAt(new Position(1, 1), GameConstants.SETTLER);
 		assertEquals("The production in city1_1 is settlers", GameConstants.SETTLER, c.getProduction());
-		
+
 		// runs five rounds...
 		for (int i = 0; i < 10; i++) {
 			game.endOfTurn();
 			game.createProductionInCityAt(new Position(1, 1));
 		}
-				
-		Unit u1 = game.getUnitAt(new Position (1, 1));
+
+		Unit u1 = game.getUnitAt(new Position(1, 1));
 		assertNotNull("There is a unit at position (1, 1)", u1);
 		assertEquals("There should be a settler at (1, 1)", GameConstants.SETTLER, u1.getTypeString());
 		assertEquals("The productionSum should be 0", 0, c.getProductionSum());
 		assertNull("Is the position north for the city null", game.getUnitAt(new Position(1, 0)));
-		
+
 		// runs five rounds...
 		for (int i = 0; i < 10; i++) {
 			game.endOfTurn();
 			game.createProductionInCityAt(new Position(1, 1));
-		} 
-		
-		Unit u2 = game.getUnitAt(new Position (0, 1));
+		}
+
+		Unit u2 = game.getUnitAt(new Position(0, 1));
 		assertNotNull("There is a unit at position (0, 1)", u2);
 		assertEquals("There should be a settler at (0, 1)", GameConstants.SETTLER, u2.getTypeString());
-		assertEquals("The productionSum should be 0", 0, c.getProductionSum());		
-		
+		assertEquals("The productionSum should be 0", 0, c.getProductionSum());
+
 		// runs 20 rounds... and check for: Is it allowed to create a settler
 		for (int i = 0; i < 40; i++) {
-				game.endOfTurn();
-				game.createProductionInCityAt(new Position(1, 1));
+			game.endOfTurn();
+			game.createProductionInCityAt(new Position(1, 1));
 		}
-		
-		Unit u3 = game.getUnitAt(new Position (1, 0));
+
+		Unit u3 = game.getUnitAt(new Position(1, 0));
 		assertNotNull("There is a unit at position (1, 0)", u3);
 		assertEquals("There should be a settler at (1, 0)", GameConstants.SETTLER, u3.getTypeString());
-		
-		//because there is an archer before all this stuff at position (2, 0)
-		assertNotNull("This spot shouldn't be null", game.getUnitAt(new Position (0, 1))); 
-		
+
+		// because there is an archer before all this stuff at position (2, 0)
+		assertNotNull("This spot shouldn't be null", game.getUnitAt(new Position(0, 1)));
+
 	}
-	
+
 	@Test
 	public void makeLegion() {
 		City c = game.getCityAt(new Position(4, 1));
-		game.changeProductionInCityAt(new Position (4, 1), GameConstants.LEGION);
+		game.changeProductionInCityAt(new Position(4, 1), GameConstants.LEGION);
 		assertEquals("The production in city4_1 is legions", GameConstants.LEGION, c.getProduction());
-		
+
 		// runs three rounds...
 		for (int i = 0; i < 6; i++) {
 			game.endOfTurn();
 			game.createProductionInCityAt(new Position(4, 1));
 		}
-				
-		Unit u1 = game.getUnitAt(new Position (4, 1));
+
+		Unit u1 = game.getUnitAt(new Position(4, 1));
 		assertNotNull("There is a unit at position (4, 1)", u1);
 		assertEquals("There should be a legion at (4, 1)", GameConstants.LEGION, u1.getTypeString());
 		assertEquals("The productionSum should be 3", 3, c.getProductionSum());
 		assertNull("Is the position north for the city null", game.getUnitAt(new Position(4, 0)));
-		
+
 		// runs nine rounds...
 		for (int i = 0; i < 18; i++) {
 			game.endOfTurn();
 			game.createProductionInCityAt(new Position(4, 1));
 		}
-		
+
 		Unit u2 = game.getUnitAt(new Position(3, 1));
 		assertNotNull("There is a unit at position (3, 1)", u2);
 		assertEquals("There should be a legion at (3, 1)", GameConstants.LEGION, u2.getTypeString());
 		assertNull("This spot should be null", game.getUnitAt(new Position(5, 2)));
 	}
-	
+
 	@Test
 	public void makeArcher() {
 		City c = game.getCityAt(new Position(1, 1));
-		game.changeProductionInCityAt(new Position (1, 1), GameConstants.ARCHER);
+		game.changeProductionInCityAt(new Position(1, 1), GameConstants.ARCHER);
 		assertEquals("The production in city1_1 is archers", GameConstants.ARCHER, c.getProduction());
-		
+
 		// runs two rounds...
 		for (int i = 0; i < 4; i++) {
 			game.endOfTurn();
 			game.createProductionInCityAt(new Position(1, 1));
 		}
-				
-		Unit u1 = game.getUnitAt(new Position (1, 1));
+
+		Unit u1 = game.getUnitAt(new Position(1, 1));
 		assertNotNull("There is a unit at position (1, 1)", u1);
 		assertEquals("There should be a archer at (1, 1)", GameConstants.ARCHER, u1.getTypeString());
 		assertEquals("The productionSum should be 2", 2, c.getProductionSum());
 		assertNull("Is the position north for the city null", game.getUnitAt(new Position(1, 0)));
-		
+
 		// runs five rounds...
-				for (int i = 0; i < 10; i++) {
-					game.endOfTurn();
-					game.createProductionInCityAt(new Position(1, 1));
-				}
-		
+		for (int i = 0; i < 10; i++) {
+			game.endOfTurn();
+			game.createProductionInCityAt(new Position(1, 1));
+		}
+
 		Unit u2 = game.getUnitAt(new Position(1, 0));
 		assertNotNull("There is a unit at position (1, 0)", u2);
 		assertEquals("There should be a archer at (1, 0)", GameConstants.ARCHER, u2.getTypeString());
-		
-		//So we have to check that the next spot i null
+
+		// So we have to check that the next spot i null
 		assertNull("This spot should be null", game.getUnitAt(new Position(0, 2)));
 	}
 
