@@ -268,12 +268,12 @@ public class TestAlphaCiv {
 	public void makeSettler() {
 		City c = game.getCityAt(new Position(1, 1));
 		game.changeProductionInCityAt(new Position(1, 1), GameConstants.SETTLER);
+		c.setProduction(GameConstants.SETTLER);
 		assertEquals("The production in city1_1 is settlers", GameConstants.SETTLER, c.getProduction());
 
 		// runs five rounds...
 		for (int i = 0; i < 10; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(1, 1));
 		}
 
 		Unit u1 = game.getUnitAt(new Position(1, 1));
@@ -285,7 +285,6 @@ public class TestAlphaCiv {
 		// runs five rounds...
 		for (int i = 0; i < 10; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(1, 1));
 		}
 
 		Unit u2 = game.getUnitAt(new Position(0, 1));
@@ -296,7 +295,6 @@ public class TestAlphaCiv {
 		// runs 20 rounds... and check for: Is it allowed to create a settler
 		for (int i = 0; i < 40; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(1, 1));
 		}
 
 		Unit u3 = game.getUnitAt(new Position(1, 0));
@@ -312,24 +310,23 @@ public class TestAlphaCiv {
 	public void makeLegion() {
 		City c = game.getCityAt(new Position(4, 1));
 		game.changeProductionInCityAt(new Position(4, 1), GameConstants.LEGION);
+		c.setProduction(GameConstants.LEGION);
 		assertEquals("The production in city4_1 is legions", GameConstants.LEGION, c.getProduction());
 
 		// runs three rounds...
 		for (int i = 0; i < 6; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(4, 1));
 		}
 
 		Unit u1 = game.getUnitAt(new Position(4, 1));
-		assertNotNull("There is a unit at position (4, 1)", u1);
+		assertNotNull("this spot shouldn't be null", u1);
 		assertEquals("There should be a legion at (4, 1)", GameConstants.LEGION, u1.getTypeString());
-		assertEquals("The productionSum should be 3", 3, c.getProductionSum());
+		assertEquals("The productionSum should be 3", c.getProductionSum(), 3);
 		assertNull("Is the position north for the city null", game.getUnitAt(new Position(4, 0)));
 
 		// runs nine rounds...
 		for (int i = 0; i < 18; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(4, 1));
 		}
 
 		Unit u2 = game.getUnitAt(new Position(3, 1));
@@ -342,12 +339,12 @@ public class TestAlphaCiv {
 	public void makeArcher() {
 		City c = game.getCityAt(new Position(1, 1));
 		game.changeProductionInCityAt(new Position(1, 1), GameConstants.ARCHER);
+		c.setProduction(GameConstants.ARCHER);
 		assertEquals("The production in city1_1 is archers", GameConstants.ARCHER, c.getProduction());
 
 		// runs two rounds...
 		for (int i = 0; i < 4; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(1, 1));
 		}
 
 		Unit u1 = game.getUnitAt(new Position(1, 1));
@@ -359,7 +356,6 @@ public class TestAlphaCiv {
 		// runs five rounds...
 		for (int i = 0; i < 10; i++) {
 			game.endOfTurn();
-			game.createProductionInCityAt(new Position(1, 1));
 		}
 
 		Unit u2 = game.getUnitAt(new Position(1, 0));

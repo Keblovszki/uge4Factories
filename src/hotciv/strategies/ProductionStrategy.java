@@ -5,6 +5,4 @@ import hotciv.framework.Position;
 public interface ProductionStrategy {
 
 	public void createProductionInCityAt(Position p);
-	
-	public void doProductionSum();
 }

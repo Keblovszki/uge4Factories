@@ -8,13 +8,17 @@ import hotciv.framework.Position;
 import hotciv.framework.Tile;
 import hotciv.framework.Unit;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.PopulationStrategy;
 import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
 import hotciv.strategies.WorldAgingStrategy;
 import hotciv.strategies.WorldLayoutStrategy;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
 
 /**
  * Skeleton implementation of HotCiv.
@@ -42,6 +46,7 @@ public class GameImpl implements Game {
 	private WorldLayoutStrategy worldLayoutStrategy;
 	private AttackingStrategy attackingStrategy;
 	private ProductionStrategy productionStrategy;
+	private PopulationStrategy populationStrategy;
 	private int round = 1;
 
 	// Constructor
@@ -56,6 +61,7 @@ public class GameImpl implements Game {
 		worldLayoutStrategy = abstractFactory.makeWorldLayoutStrategy(this);
 		attackingStrategy = abstractFactory.makeAttackStrategy(this);
 		productionStrategy = abstractFactory.makeProductionStrategy(this);
+		populationStrategy = abstractFactory.makePopulationStrategy(this);
 
 		getMapCity().putAll(worldLayoutStrategy.makeCityList());
 		getMapUnit().putAll(worldLayoutStrategy.makeUnitList());
@@ -118,7 +124,6 @@ public class GameImpl implements Game {
 	@Override
 	public boolean attackUnit(Position from, Position to) {
 		if (getMapUnit().get(to) != null) {
-			// this.attackingStrategy.setUp(this);
 			boolean rota = this.attackingStrategy.resultOfTheAttack(from, to);
 			if (rota == true) {
 				if (getUnitAt(to).getOwner() == Player.RED) {
@@ -148,7 +153,11 @@ public class GameImpl implements Game {
 		} else {
 			age = worldAgingStrategy.worldAging(age);
 			playerInTurn = Player.RED;
-			productionStrategy.doProductionSum();
+			for(Entry<Position, City> entry : mapCity.entrySet()){
+				Position p = entry.getKey();
+				productionStrategy.createProductionInCityAt(p);
+				populationStrategy.increasePopulation(p);
+			}
 			round += 1;
 		}
 	}
@@ -174,7 +183,6 @@ public class GameImpl implements Game {
 
 	@Override
 	public void performUnitActionAt(Position p) {
-		// unitActionStrategy.setGame(this);
 		Unit u = getMapUnit().get(p);
 		unitActionStrategy.performUnitActionAt(u, p);
 	}

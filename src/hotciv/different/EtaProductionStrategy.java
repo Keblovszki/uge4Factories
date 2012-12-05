@@ -15,8 +15,6 @@ public class EtaProductionStrategy implements ProductionStrategy {
 
 	private Game game;
 	private HashMap<String, Integer> mapTilesAroundCity;
-	private int foodProduction = 0;
-	private int unitProduction = 0;
 
 	public EtaProductionStrategy(Game game) {
 		setMapTilesAroundCity(new HashMap<String, Integer>());
@@ -33,7 +31,7 @@ public class EtaProductionStrategy implements ProductionStrategy {
 	public void makeTileMap(Position p) {
 		final ArrayList<Position> postitionsAroundTheCity = p.getNeighbours();
 		final ArrayList<Tile> tilesAroundCity = new ArrayList<Tile>();
-
+		
 		// add all tiles around the city to an ArrayList.
 		for (Position currentPosition : postitionsAroundTheCity) {
 			tilesAroundCity.add(game.getTileAt(currentPosition));
@@ -47,23 +45,26 @@ public class EtaProductionStrategy implements ProductionStrategy {
 	}
 	
 	public void calculateTheUnitProduction(City c) {
+		int unitProduction = 0;
 		int sizeOfCity = c.getSize();
 		for (String tile : GameConstants.costList) {
 			int count1 = mapTilesAroundCity.get(tile);
 			for (int i = 0; i < count1; i++) {
 				if (sizeOfCity > 0) {
 					sizeOfCity --;
-					unitProduction += GameConstants.costMap.get(tile);
+					unitProduction += GameConstants.productionMap.get(tile);
 				}
 				else {
 					break;
 				}
 			}
-			c.setProductionSum(c.getProductionSum() + unitProduction);
 		}
+		c.setProductionChange(unitProduction);
+		c.doProductionSum();
 	}
 	
 	public void calculateTheFoodProduction(City c) {
+		int foodProduction = 0;
 		int sizeOfCity = c.getSize();
 		for (String tile : GameConstants.foodList) {
 			int count = mapTilesAroundCity.get(tile);
@@ -76,8 +77,8 @@ public class EtaProductionStrategy implements ProductionStrategy {
 					break;
 				}
 			}
-			c.setFoodProduction(c.getFoodProduction() + foodProduction);
 		}
+		c.setFoodProduction(c.getFoodProduction() + foodProduction);
 	}
 
 	@Override
@@ -87,19 +88,19 @@ public class EtaProductionStrategy implements ProductionStrategy {
 
 		if (game.getMapCity().get(p) != null) {
 			City c = game.getMapCity().get(p);
-			if (c.getWorkforceFocus().equals(GameConstants.productionFocus)) {
+			if (c.getWorkforceFocus() != null && c.getWorkforceFocus().equals(GameConstants.productionFocus)) {
 				calculateTheUnitProduction(c);
-				if (c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
+				if (c.getProduction() != null && c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
 					for (Position currentPosition : postitionsAroundTheCity) {
 						if (game.getMapUnit().get(currentPosition) == null) {
 							game.getMapUnit().put(currentPosition, new UnitImpl(c.getOwner(), c.getProduction(), game));
 							break;
 						}
 					}
-					c.setProductionSum(-GameConstants.costMap.get(c.getProduction()));
+					c.setProductionSum(- GameConstants.costMap.get(c.getProduction()));
 				}
 			}
-			if (c.getWorkforceFocus().equals(GameConstants.foodFocus)) {
+			else {
 				calculateTheFoodProduction(c);
 			}
 		}
@@ -112,9 +113,5 @@ public class EtaProductionStrategy implements ProductionStrategy {
 	public void setMapTilesAroundCity(HashMap<String, Integer> mapTilesAroundCity) {
 		this.mapTilesAroundCity = mapTilesAroundCity;
 	}
-
-	@Override
-	public void doProductionSum() {
-		//do nothing...
-	}
+	
 }

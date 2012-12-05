@@ -32,6 +32,11 @@ public class CityImpl implements City {
 	public int getSize() {
 		return cityPopulation;
 	}
+	
+	@Override
+	public void setSize(int reSize) {
+		cityPopulation = reSize;
+	}
 
 	@Override
 	public String getProduction() {
