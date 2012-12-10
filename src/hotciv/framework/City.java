@@ -65,4 +65,6 @@ public interface City {
 	public int getFoodProduction();
 	
 	public void setFoodProduction(int foodProduction);
+	
+	public void setSize(int reSize);
 }

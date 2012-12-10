@@ -1,5 +1,6 @@
 package hotciv.factories;
 
+import hotciv.different.AlphaPopulationStrategy;
 import hotciv.different.BetaWorldAgingStrategy;
 import hotciv.different.DeltaWorldLayoutStrategy;
 import hotciv.different.EpsilonAttackStrategy;
@@ -9,6 +10,7 @@ import hotciv.different.GammaUnitActionStrategy;
 import hotciv.framework.Game;
 import hotciv.standard.TestDice;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.PopulationStrategy;
 import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
@@ -45,6 +47,11 @@ public class SemiCivFactory implements AbstractFactory {
 	@Override
 	public ProductionStrategy makeProductionStrategy(Game game) {
 		return new EtaProductionStrategy(game);
+	}
+
+	@Override
+	public PopulationStrategy makePopulationStrategy(Game game) {
+		return new AlphaPopulationStrategy();
 	}
 
 }

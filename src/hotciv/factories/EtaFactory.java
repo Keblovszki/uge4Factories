@@ -4,10 +4,12 @@ import hotciv.different.AlphaAttackStrategy;
 import hotciv.different.AlphaUnitActionStrategy;
 import hotciv.different.AlphaWinnerStrategy;
 import hotciv.different.AlphaWorldAgingStrategy;
+import hotciv.different.EtaPopulationStrategy;
 import hotciv.different.EtaProductionStrategy;
 import hotciv.different.TestWorldLayoutStrategy;
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.PopulationStrategy;
 import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
@@ -44,5 +46,10 @@ public class EtaFactory implements AbstractFactory {
 	@Override
 	public ProductionStrategy makeProductionStrategy(Game game) {
 		return new EtaProductionStrategy(game);
+	}
+
+	@Override
+	public PopulationStrategy makePopulationStrategy(Game game) {
+		return new EtaPopulationStrategy(game);
 	}
 }

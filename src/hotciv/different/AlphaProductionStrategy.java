@@ -15,31 +15,25 @@ public class AlphaProductionStrategy implements ProductionStrategy {
 
 	public AlphaProductionStrategy(Game game) {
 		this.game = game;
-	}	
+	}
 
 	public void createProductionInCityAt(Position p) {
-	final ArrayList<Position> postitionsAroundTheCity = p.getNeighbours();
-	
-	// Archer costs 10 production
-	// Legions costs 15 production
-	// Settler costs 30 production
-	if (game.getMapCity().get(p) != null) {
-		City c = game.getMapCity().get(p);
-			if (c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
+		final ArrayList<Position> postitionsAroundTheCity = p.getNeighbours();
+		// Archer costs 10 production
+		// Legions costs 15 production
+		// Settler costs 30 production
+		if (game.getMapCity().get(p) != null) {
+			City c = game.getMapCity().get(p);
+			c.doProductionSum();
+			if (c.getProduction() != null && c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
 				for (Position currentPosition : postitionsAroundTheCity) {
 					if (game.getMapUnit().get(currentPosition) == null) {
 						game.getMapUnit().put(currentPosition, new UnitImpl(c.getOwner(), c.getProduction(), game));
 						break;
 					}
 				}
-				c.setProductionSum(-GameConstants.costMap.get(c.getProduction()));
+				c.setProductionSum(- GameConstants.costMap.get(c.getProduction()));
 			}
-		}
-	}
-	
-	public void doProductionSum() {
-		for (City c : game.getMapCity().values()) {
-			c.doProductionSum();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package hotciv.factories;
 
 import hotciv.different.AlphaAttackStrategy;
+import hotciv.different.AlphaPopulationStrategy;
 import hotciv.different.AlphaProductionStrategy;
 import hotciv.different.AlphaWinnerStrategy;
 import hotciv.different.AlphaWorldAgingStrategy;
@@ -8,6 +9,7 @@ import hotciv.different.AlphaWorldLayoutStrategy;
 import hotciv.different.GammaUnitActionStrategy;
 import hotciv.framework.Game;
 import hotciv.strategies.AttackingStrategy;
+import hotciv.strategies.PopulationStrategy;
 import hotciv.strategies.ProductionStrategy;
 import hotciv.strategies.UnitActionStrategy;
 import hotciv.strategies.WinnerStrategy;
@@ -44,6 +46,11 @@ public class GammaFactory implements AbstractFactory {
 	@Override
 	public ProductionStrategy makeProductionStrategy(Game game) {
 		return new AlphaProductionStrategy(game);
+	}
+
+	@Override
+	public PopulationStrategy makePopulationStrategy(Game game) {
+		return new AlphaPopulationStrategy();
 	}
 
 }

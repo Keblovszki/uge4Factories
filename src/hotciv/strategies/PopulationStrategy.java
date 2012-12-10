@@ -1,5 +1,8 @@
 package hotciv.strategies;
 
-public interface PopulationStrategy {
+import hotciv.framework.Position;
 
+public interface PopulationStrategy {
+	
+	public void increasePopulation(Position p);
 }
