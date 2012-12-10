@@ -60,12 +60,10 @@ public class EtaProductionStrategy implements ProductionStrategy {
 			int sizeOfCity = c.getSize();
 			if (c.getWorkforceFocus().equals(GameConstants.productionFocus)) {
 				
-				
-				
-				
+						
 				if (c.getProductionSum() >= GameConstants.costMap.get(c.getProduction())) {
 					for (Position currentPosition : postitionsAroundTheCity) {
-						if (game.getMapUnit().get(currentPosition) == null) {
+						if (game.getMapUnit().get(currentPosition) == null) { 
 							game.getMapUnit().put(currentPosition, new UnitImpl(c.getOwner(), c.getProduction(), game));
 							break;
 						}
